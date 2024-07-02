@@ -2,8 +2,6 @@ import requests
 from bs4 import BeautifulSoup as bs
 import json
 from tqdm import tqdm
-import time
-import random
 
 
 def save_data(data_json, filename='data.json'):
@@ -41,6 +39,7 @@ for page in tqdm(range(0, 46), desc="Page Loop", unit="Iteration"):
     # get the JSON formatted data
     data = response.json()
 
+    # in case API auth token resets mid-loop, save data up until now to prevent rerunning the entire code
     if 'data' not in data:
         with open('data.json', 'w') as f:
             json.dump(final_json, f, indent=4)
@@ -75,7 +74,9 @@ for page in tqdm(range(0, 46), desc="Page Loop", unit="Iteration"):
             # use BeautifulSoup to extract the relevant information
             soup = bs(local_data, 'html.parser')
 
+            # all relevant elements are stored within the <dd> tag
             dd_elements = soup.find_all('dd')
+            # link to pdf is further enclosed in an <a> tag
             pdf_link = soup.find_all('a')
             pdf_link = 'https://links.sgx.com' + pdf_link[0].get('href')
 
