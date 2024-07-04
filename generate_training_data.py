@@ -16,6 +16,7 @@ with open(file_path, 'r') as file:
 company_names = []
 years = []
 report_types = []
+headquarters = []
 relevant_keys = ['Issuer/Manager', 'Report Type', 'Period Ended']
 
 # for each element of raw data, extract only the required labels
@@ -27,6 +28,8 @@ for data in raw_data:
     years.append(year if year.isdigit() else None)
     # extract report type
     report_types.append(data[relevant_keys[1]].lower())
+    # extract headquarter information
+    headquarters.append("singapore")
 
 
 # STEP 2: Extract all PDF text and convert to string of data
@@ -66,6 +69,7 @@ for link in tqdm(raw_data):
         print(f"{link['PDF Link']} did not work.")
     except Exception:
         print(f"Code stopped at {link['PDF Link']}.")
+        pdf_texts.append(None)
         with open('backup.txt', 'w') as f:
             for line in pdf_texts:
                 f.write(f"{line}\n")
@@ -85,6 +89,7 @@ for f_link in faulty_links:
     company_names.pop(f_link)
     years.pop(f_link)
     report_types.pop(f_link)
+    headquarters.pop(f_link)
 
 print(len(company_names))
 print(len(years))
@@ -95,10 +100,11 @@ df = pd.DataFrame({
     'text': lines,
     'company_name': company_names,
     'year': years,
-    'report_type': report_types
+    'report_type': report_types,
+    'headquarter': headquarters
 })
 
 # write the dataframe to json
-df.to_csv('training_data.csv')
+df.to_csv('all_data.csv')
 
 

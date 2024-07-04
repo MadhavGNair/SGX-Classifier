@@ -6,8 +6,9 @@ The files present are explained below,
 Python:
 - SGX_scraper.py - the API based scraper
 - SGX_scraper_selenium.py - the initial selenium based scraper (incomplete)
-- PDF_classifier.py - LLM model training code
+- process_dataframe.py - for testing and modifying all_data.csv
 - generate_training_data.py - Extracts relevant training data from raw data
+- pdf_classifier.ipynb - the PDF classifier model
 
 JSON:
 - data.json - raw data
