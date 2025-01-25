@@ -19,7 +19,7 @@ for page in tqdm(range(0, 46), desc="Page Loop", unit="Iteration"):
     headers = {
         'accept': '*/*',
         'accept-language': 'en-US,en;q=0.9',
-        'authorizationtoken': 'NGc8vjNDwMkN/HCgVLnlNiap7ug+QeZzopPPpVrBDlh52kPxUIfjmdLx+/f93BXkEbHZuJOlmJbmPlTPnT4z69jERQ1CFSVA2YKWRGmukzZXz7Xx81tGRIa41bk3RPhTj/2pMR1END==',
+        'authorizationtoken': 'token here',
         'dnt': '1',
         'origin': 'https://www.sgx.com',
         'priority': 'u=1, i',
